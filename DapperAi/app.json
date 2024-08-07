@@ -28,12 +28,14 @@
     },
     "plugins": [
       "expo-router",
-      "expo-camera",
+      [
+        "expo-camera",
         {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "cameraPermission": "Allow DapperAI to access your camera",
+          "microphonePermission": "Allow DapperAI to access your microphone",
           "recordAudioAndroid": true
         }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

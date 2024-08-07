@@ -5,17 +5,21 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { FIREBASE_DB } from '@/firebaseConfig';
 import { ref, set, serverTimestamp } from 'firebase/database';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Camera } from 'expo-camera'
 
 export default function HomeScreen() {
+
+
 
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const db = FIREBASE_DB;
 
-  const handleCameraPress = () => {
+  const handleCameraPress = async () => {
     console.log('Camera pressed');
+
   };
 
   const handleOpenCamera = () => {
