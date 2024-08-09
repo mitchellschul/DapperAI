@@ -33,7 +33,9 @@
         {
           "cameraPermission": "Allow DapperAI to access your camera",
           "microphonePermission": "Allow DapperAI to access your microphone",
-          "recordAudioAndroid": true
+          "savePhotosPermission": "Allow DapperAI to save photos.",
+          "recordAudioAndroid": true,
+          "isAccessMediaLocationEnabled": "true"
         }
       ]
     ],
