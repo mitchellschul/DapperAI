@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import ItemCard from '@/components/ItemCard'
 
@@ -18,41 +18,53 @@ const WardrobeScreen: React.FC = () => {
   ];
 
   const itemTypes = [...new Set(items.map(item => item.type))];
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
-  console.log(itemTypes)
 
 
+
+  const toggleItemType = (type: string) => {
+    setSelectedTypes(prev =>
+      prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
+    );
+  };
+
+  const filteredItems = selectedTypes.length > 0
+    ? items.filter(item => selectedTypes.includes(item.type))
+    : items;
 
   return (
     <SafeAreaView style={styles.container}>
-
-
       {/* Header with filters */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.filterButton}>
-          <Text style={styles.filterText}>Filter</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>Wardrobe</Text>
+        {/* ... existing header code ... */}
       </View>
-
-
 
       {/* Wardrobe items */}
       <ScrollView contentContainerStyle={styles.grid}>
         <View>
           <ScrollView horizontal={true}>
             {itemTypes.map((type, index) => (
-              <TouchableOpacity key={index} style={styles.circleButton}>
-                <Text>{type[0]}</Text>
+              <TouchableOpacity
+                key={index}
+                style={[
+                  styles.circleButton,
+                  selectedTypes.includes(type) && styles.selectedCircleButton
+                ]}
+                onPress={() => toggleItemType(type)}
+              >
+                <Text style={selectedTypes.includes(type) ? styles.selectedFilterText : styles.filterText}>
+                  {type[0].toUpperCase()}
+                </Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
-        {items.map((item) => (
+        {filteredItems.map((item) => (
           <ItemCard key={item.id} item={item} />
         ))}
       </ScrollView>
-    </SafeAreaView >
+    </SafeAreaView>
   );
 };
 
@@ -128,7 +140,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 50,
     margin: 8
-  }
+  },
+  selectedCircleButton: {
+    backgroundColor: '#007AFF',
+  },
+  selectedFilterText: {
+    color: '#FFF',
+  },
 });
 
 export default WardrobeScreen;
