@@ -6,6 +6,8 @@ import Animated, {
   useAnimatedStyle,
   useScrollViewOffset,
 } from 'react-native-reanimated';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+
 
 import { ThemedView } from '@/components/ThemedView';
 
@@ -41,6 +43,5 @@ const styles = StyleSheet.create({
     height: 900,
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'row',
   },
 });

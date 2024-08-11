@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import ItemCard from '@/components/ItemCard'
+import { getDatabase, ref, onValue } from "firebase/database";
 
 const WardrobeScreen: React.FC = () => {
   const items = [
@@ -19,6 +20,14 @@ const WardrobeScreen: React.FC = () => {
 
   const itemTypes = [...new Set(items.map(item => item.type))];
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+
+  const database = getDatabase();
+  const itemsRef = ref(database, 'images/');
+  onValue(itemsRef, (snapshot) => {
+    const data = snapshot.val();
+    console.log(data);
+    // updateStarCount(postElement, data);
+  });
 
 
 
@@ -43,7 +52,7 @@ const WardrobeScreen: React.FC = () => {
       {/* Wardrobe items */}
       <ScrollView contentContainerStyle={styles.grid}>
         <View>
-          <ScrollView horizontal={true}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {itemTypes.map((type, index) => (
               <TouchableOpacity
                 key={index}

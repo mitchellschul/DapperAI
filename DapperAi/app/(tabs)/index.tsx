@@ -10,11 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import CameraScreen from '@/components/CameraScreen'
 import { Camera } from 'expo-camera';
 
-
 export default function HomeScreen() {
-
-
-
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
