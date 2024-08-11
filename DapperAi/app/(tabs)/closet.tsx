@@ -17,11 +17,15 @@ const WardrobeScreen: React.FC = () => {
     // Add more items as needed
   ];
 
+  const itemTypes = [...new Set(items.map(item => item.type))];
+
+  console.log(itemTypes)
+
+
+
   return (
     <SafeAreaView style={styles.container}>
-      <View>
 
-      </View>
 
       {/* Header with filters */}
       <View style={styles.header}>
@@ -31,13 +35,24 @@ const WardrobeScreen: React.FC = () => {
         <Text style={styles.title}>Wardrobe</Text>
       </View>
 
+
+
       {/* Wardrobe items */}
       <ScrollView contentContainerStyle={styles.grid}>
+        <View>
+          <ScrollView horizontal={true}>
+            {itemTypes.map((type, index) => (
+              <TouchableOpacity key={index} style={styles.circleButton}>
+                <Text>{type[0]}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
         {items.map((item) => (
           <ItemCard key={item.id} item={item} />
         ))}
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 };
 
@@ -103,6 +118,17 @@ const styles = StyleSheet.create({
     color: '#333',
     textAlign: 'center',
   },
+  circleButton: {
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0.2)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 80,
+    height: 80,
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    margin: 8
+  }
 });
 
 export default WardrobeScreen;
